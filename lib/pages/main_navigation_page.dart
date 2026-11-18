@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+// Mengimpor layar Tab 0: Beranda & Katalog Produk
 import 'dashboard_page.dart';
+
+// Mengimpor layar Tab 3: Profil Toko & Kelola Staf Karyawan
+import 'profil_toko_page.dart';
 
 class MainNavigationPage extends StatefulWidget {
   const MainNavigationPage({super.key});
@@ -10,34 +14,41 @@ class MainNavigationPage extends StatefulWidget {
 }
 
 class _MainNavigationPageState extends State<MainNavigationPage> {
+  // Indeks tab menu yang sedang aktif
   int _currentIndex = 0;
 
+  // Daftar 4 layar menu utama aplikasi SmartKasir
   final List<Widget> _pages = [
+    // Indeks 0: Beranda
     const DashboardPage(),
+
+    // Indeks 1: Kasir POS
     const Center(
       child: Text(
         'Menu 2: Transaksi Kasir POS (Modul M14)',
         style: TextStyle(fontSize: 16),
       ),
     ),
+
+    // Indeks 2: Riwayat Penjualan
     const Center(
       child: Text(
-        'Menu 3: Riwayat Penjualan & Laporan (Modul M12)',
+        'Menu 3: Riwayat Penjualan & Laporan (Modul M14)',
         style: TextStyle(fontSize: 16),
       ),
     ),
-    const Center(
-      child: Text(
-        'Menu 4: Profil Toko & Pengaturan (Modul M12)',
-        style: TextStyle(fontSize: 16),
-      ),
-    ),
+
+    // Indeks 3: Profil Toko
+    const ProfilTokoPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Menampilkan halaman sesuai tab yang dipilih
       body: _pages[_currentIndex],
+
+      // Bilah navigasi bawah
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -50,20 +61,27 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         ),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
+
+          // Mengubah tab ketika tombol ditekan
           onTap: (index) {
             setState(() {
               _currentIndex = index;
             });
           },
+
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           selectedItemColor: const Color(0xFF1E3A8A),
           unselectedItemColor: Colors.grey.shade500,
+
           selectedLabelStyle: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 11,
           ),
+
           unselectedLabelStyle: const TextStyle(fontSize: 10),
+
+          // Empat tombol navigasi
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.storefront_outlined),
